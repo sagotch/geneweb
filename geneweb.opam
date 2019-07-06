@@ -13,18 +13,9 @@ dev-repo: "git://github.com/geneweb/geneweb"
 bug-reports: "https://github.com/geneweb/geneweb/issues"
 
 build: [
-  [ "./configure" "--api" ]
-  [ make "install-exe" ]
-]
-
-install: [
-  [ "./configure" "--api" ]
-  [ make "install" ]
-]
-
-remove: [
-  [ "./configure" "--api" ]
-  [ make "uninstall" ]
+  [ "./configure" ]
+  [ "dune" "build" "-p" name "-j" jobs ]
+  [ "dune" "runtest" "-p" name "-j" jobs ] { with-test }
 ]
 
 pin-depends: [
