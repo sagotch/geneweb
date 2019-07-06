@@ -3,6 +3,7 @@
  (public_name geneweb.sosa-zarith)
  (wrapped false)
  (libraries zarith)
+ (optional)
  (flags       (:standard -no-keep-locs))
 )
 

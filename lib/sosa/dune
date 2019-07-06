@@ -2,6 +2,7 @@
  (name geneweb_sosa)
  (public_name geneweb.sosa)
  (wrapped false)
+ (optional)
  (flags (:standard -no-keep-locs))
 )
 
