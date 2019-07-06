@@ -19,10 +19,6 @@ cache:
   directories:
     - /home/travis/.opam/
 
-cache:
-  directories:
-    - /home/travis/.opam/
-
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update && brew install protobuf ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq && sudo apt-get install -qq protobuf-compiler ; fi
@@ -41,12 +37,13 @@ script:
       opam pin add piqi https://github.com/geneanet/piqi-ocaml.git --no-action ;
     fi ;
     opam pin add geneweb . --no-action ;
-    opam update ;
     opam install geneweb --with-test --deps-only ;
     ./configure && make clean test bench distrib clean ;
-    opam install ocurl piqi piqilib redis redis-sync yojson ;
+    opam pin add geneweb-api . --no-action ;
+    opam install geneweb-api --with-test --deps-only ;
     ./configure --api && make clean test bench distrib clean ;
     opam install num ;
     ./configure --sosa-num && make clean test bench distrib clean ;
-    opam install zarith ;
+    opam pin add geneweb-zarith . --no-action ;
+    opam install geneweb-zarith --with-test --deps-only ;
     ./configure --sosa-zarith && make clean test bench distrib clean ;
